@@ -35,13 +35,6 @@ body{
     text-align: center;
 }
 
-/* .face{
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    flex-direction: column;
-} */
-
 .face{
     padding-top: 2%;
 }
@@ -100,7 +93,6 @@ body{
     background-color: rgba(148,187,233,1);
     color: #fefefe;
     border: none;
-    /* border: 1px solid rgb(76, 76, 255); */
 }
 
 .tasks button{

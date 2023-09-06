@@ -4,7 +4,7 @@ const subTaskAdding = document.getElementById("taskbar");
 
 const adding = document.getElementById("addBtn");
 
-const tasksList=[]
+const tasksList=JSON.parse(localStorage.getItem("Tasks")) || [];
 
 /* Show items when loading the page */
 loadingPage();
@@ -28,6 +28,7 @@ const sethtml = tasksList.map(function(Items){
 subTaskAdding.innerHTML=sethtml.join('');
 }
 
+//Input items
 function inputInto(){
     var newdate = new Date(addDate.value);
     var pendingTasks=
@@ -41,7 +42,13 @@ function inputInto(){
 
 }
 
+//savedata on local storage
+function savaData(){
+  localStorage.setItem("Tasks",JSON.stringify(tasksList));
+}
+
 adding.addEventListener("click",function(){
     event.preventDefault();
     inputInto();
+    savaData();
 })
