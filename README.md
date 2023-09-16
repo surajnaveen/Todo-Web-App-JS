@@ -10,7 +10,7 @@ A mobile-responsive Todo Application built using HTML, CSS, and JavaScript, whic
 - Mobile-responsive design for seamless task management on all devices.
 
 ## Demo
-![plot](images/image2.png) <!-- Replace with a link to a GIF or screenshot of your application -->
+![plot](images/image2.png)
 
 You can try the application live [here](https://surajnaveen.github.io/Todo-Web-App-JS/).
 
