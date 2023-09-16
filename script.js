@@ -2,7 +2,12 @@ const addTask = document.getElementById("taskAdding");
 const addDate = document.getElementById("dateAdding");
 const subTaskAdding = document.getElementById("taskbar");
 const adding = document.getElementById("addBtn");
-
+var modal = document.getElementById("myModal");
+var span = document.getElementsByClassName("close")[0];
+var updateForm = document.getElementById("editform");
+var textfield = document.getElementById("taskEdit");
+var datedfield = document.getElementById("dateEdit");
+var btn = document.getElementById("editBtn");
 var tasksList=JSON.parse(localStorage.getItem("Tasks")) || [];
 
 /* Show items when loading the page */
@@ -16,8 +21,8 @@ const sethtml = tasksList.map(function(Items){
     <div class="date-div">
       <h3 class="subtitle date">${Items.date}</h3>
     </div>
-    <i class="fa-regular fa-trash-can" onClick="deleteTodo(${Items.id})"></i>
-    <i class="fa-regular fa-pen-to-square"></i>
+    <i class="fa-regular fa-trash-can" onclick="deleteTodo(${Items.id})"></i>
+    <i class="fa-regular fa-pen-to-square editbtn" id="btns" onclick="editTodo(${Items.id})"></i>
   </div>`;
 
   return result;
@@ -34,7 +39,7 @@ function inputInto(){
         {
             id:parseInt(idNum),
             title: addTask.value,
-            date: newdate.toDateString()
+            date: newdate.toLocaleDateString()
         }
 
     tasksList.push(pendingTasks);
@@ -62,3 +67,43 @@ adding.addEventListener("click",function(){
     inputInto();
     savaData();
 })
+
+//pop up box and edit items
+function editTodo(funcId) {
+  modal.style.display = "block";
+
+  span.onclick = function () {
+    modal.style.display = "none";
+    location.reload();
+  };
+
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+      location.reload();
+    }
+  };
+
+  // Find the task to edit
+  const itemToEdit = tasksList.find((item) => item.id === funcId);
+
+  console.log(itemToEdit);
+
+  if (itemToEdit) {
+    textfield.value = itemToEdit.title;
+    datedfield.value = itemToEdit.date;
+
+    updateForm.addEventListener("click", function () {
+      itemToEdit.title = textfield.value;
+      itemToEdit.date = datedfield.value;
+
+      savaData();
+      loadingPage();
+    });
+  }
+
+  btn.addEventListener("click", function () {
+    modal.style.display = "none";
+  });
+}
+
